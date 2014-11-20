@@ -102,14 +102,21 @@ var _ = {};
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    var unique = [];
+    for (var i = 0; i < array.length; i++) {
+      if (unique.indexOf(array[i]) < 0) unique.push(array[i]);
+    }
+    return unique;
   };
-
 
   // Return the results of applying an iterator to each element.
   _.map = function(collection, iterator) {
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
+    var mapped = [];
+    _.each(collection, function(item) { mapped.push(iterator(item)); });
+    return mapped;
   };
 
   /*
@@ -148,8 +155,8 @@ var _ = {};
   //   var sum = _.reduce(numbers, function(total, number){
   //     return total + number;
   //   }, 0); // should be 6
-  _.reduce = function(collection, iterator, accumulator) {
-  };
+_.reduce = function(collection, iterator, accumulator) {
+};
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
@@ -194,8 +201,8 @@ var _ = {};
   //   }, {
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
-  _.extend = function(obj) {
-  };
+_.extend = function(obj) {
+};
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
