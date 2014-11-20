@@ -39,6 +39,11 @@ var _ = {};
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
+    if (n === undefined) {
+      return array[array.length - 1];
+    } else {
+      return n > array.length ? array : array.slice(array.length - n, n + 1);
+    }
   };
 
   // Call iterator(value, key, collection) for each element of collection.
@@ -124,8 +129,8 @@ var _ = {};
   //   var sum = _.reduce(numbers, function(total, number){
   //     return total + number;
   //   }, 0); // should be 6
-  _.reduce = function(collection, iterator, accumulator) {
-  };
+_.reduce = function(collection, iterator, accumulator) {
+};
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
@@ -170,8 +175,8 @@ var _ = {};
   //   }, {
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
-  _.extend = function(obj) {
-  };
+_.extend = function(obj) {
+};
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
