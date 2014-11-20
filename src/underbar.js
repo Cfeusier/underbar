@@ -140,6 +140,15 @@ var _ = {};
   // Calls the method named by functionOrKey on each value in the list.
   // Note: you will nead to learn a bit about .apply to complete this.
   _.invoke = function(collection, functionOrKey, args) {
+    var isFunc = functionOrKey.constructor === Function;
+
+    return _.map(collection, function(item) {
+      if (isFunc) {
+        return functionOrKey.apply(item, args)
+      } else {
+        return item[functionOrKey].apply(item, args);
+      }
+    });
   };
 
   // Reduces an array or object to a single value by repetitively calling
@@ -155,8 +164,8 @@ var _ = {};
   //   var sum = _.reduce(numbers, function(total, number){
   //     return total + number;
   //   }, 0); // should be 6
-_.reduce = function(collection, iterator, accumulator) {
-};
+  _.reduce = function(collection, iterator, accumulator) {
+  };
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
@@ -201,8 +210,8 @@ _.reduce = function(collection, iterator, accumulator) {
   //   }, {
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
-_.extend = function(obj) {
-};
+  _.extend = function(obj) {
+  };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
