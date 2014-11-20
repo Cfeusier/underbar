@@ -84,9 +84,7 @@ var _ = {};
   _.filter = function(collection, test) {
     var filtered = [];
     _.each(collection, function(item) {
-      if (test.call(null, item)) {
-        filtered.push(item);
-      }
+      if (test.call(null, item)) filtered.push(item);
     });
     return filtered;
   };
