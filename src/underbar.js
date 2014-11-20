@@ -52,6 +52,15 @@ var _ = {};
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
+    if (collection.constructor === Array) {
+      for (var i = 0; i < collection.length; i++) {
+        iterator.apply(null, [collection[i], i, collection]);
+      }
+    } else if (collection.constructor === Object) {
+      for (var key in collection) {
+        iterator.apply(null, [collection[key], key, collection]);
+      }
+    }
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
@@ -129,8 +138,8 @@ var _ = {};
   //   var sum = _.reduce(numbers, function(total, number){
   //     return total + number;
   //   }, 0); // should be 6
-_.reduce = function(collection, iterator, accumulator) {
-};
+  _.reduce = function(collection, iterator, accumulator) {
+  };
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
@@ -175,8 +184,8 @@ _.reduce = function(collection, iterator, accumulator) {
   //   }, {
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
-_.extend = function(obj) {
-};
+  _.extend = function(obj) {
+  };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
