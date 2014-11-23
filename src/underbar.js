@@ -330,7 +330,7 @@ var _ = {};
     return arrayCopy;
   };
 
-
+  /* TODO after full-time job ends and other deliverables are completed */
   /**
    * Note: This is the end of the pre-course curriculum. Feel free to continue,
    * but nothing beyond here is required.
