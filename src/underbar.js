@@ -239,7 +239,14 @@ var _ = {};
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
-  _.defaults = function(obj) {
+  _.defaults = function(to) {
+    for (var i = 1; i < arguments.length; i++) {
+      var from = arguments[i];
+      _.each(from, function(value, key, from) {
+        !(key in to) ? to[key] = value : null;
+      });
+    }
+    return to;
   };
 
 
