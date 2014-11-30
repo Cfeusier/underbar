@@ -382,6 +382,27 @@ var _ = {};
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+    var set = [];
+    var firstArr = arguments[0];
+    var numArrs = arguments.length;
+
+    for (var i = 0; i < firstArr.length; i++) {
+      var item = firstArr[i];
+
+      // skip iteration if set already contains item
+      if (_.contains(set, item)) continue;
+
+      for (var j = 1; j < numArrs; j++) {
+        // break out of loop if current array doesn't contain item
+        if(!_.contains(arguments[j], item)) break;
+      }
+
+      // if all of the arrays contain the item,
+      // the loop will have iterated numArrs times
+      if (j === numArrs) set.push(item);
+    }
+
+    return set;
   };
 
   // Take the difference between one array and a number of other arrays.
