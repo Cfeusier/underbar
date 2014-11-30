@@ -408,6 +408,19 @@ var _ = {};
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+    var diff = [];
+
+    for (var i = 0; i < array.length; i++) {
+      if (_.contains(diff, array[i])) continue;
+
+      for (var j = 1; j < arguments.length; j++) {
+        if (_.contains(arguments[j], array[i])) break;
+      }
+
+      if (j === arguments.length) diff.push(array[i]);
+    }
+
+    return diff;
   };
 
 
