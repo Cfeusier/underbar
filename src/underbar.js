@@ -216,7 +216,7 @@ var _ = {};
    * =======
    *
    * In this section, we'll look at a couple of helpers for merging objects.
-   */
+  */
 
   // Extend a given object with all the properties of the passed in
   // object(s).
@@ -354,6 +354,15 @@ var _ = {};
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
+    var zipped = [];
+
+    for (var i = 0; i < arguments.length; i++) {
+      var inner = [];
+      for (var j = 0; j < arguments.length; j++) { inner.push(arguments[j][i]); }
+      zipped.push(inner);
+    }
+
+    return zipped;
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
