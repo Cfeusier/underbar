@@ -190,14 +190,14 @@ var _ = {};
     // TIP: Try re-using reduce() here.
     var reducer = function() {
      return  _.reduce(collection, function(passed, item) {
-        if (!iterator) { return item; }
-        else if (!iterator(item)) { return false; }
-        return passed;
-      }, true);
-    };
+      if (!iterator) { return item; }
+      else if (!iterator(item)) { return false; }
+      return passed;
+    }, true);
+   };
 
-    return collection.length === 0 ? true : reducer();
-  };
+   return collection.length === 0 ? true : reducer();
+ };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
@@ -342,6 +342,10 @@ var _ = {};
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+    var criterion = function(a, b) {
+      return iterator.constructor === String ? a[iterator] > b[iterator] : iterator(a) > iterator(b);
+    };
+    return collection.sort(criterion);
   };
 
   // Zip together two or more arrays with elements of the same index
