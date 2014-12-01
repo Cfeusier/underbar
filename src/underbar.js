@@ -216,7 +216,7 @@ var _ = {};
    * =======
    *
    * In this section, we'll look at a couple of helpers for merging objects.
-  */
+   */
 
   // Extend a given object with all the properties of the passed in
   // object(s).
@@ -359,7 +359,7 @@ var _ = {};
     for (var i = 0; i < arguments.length; i++) {
       var inner = [];
       for (var j = 0; j < arguments.length; j++) { inner.push(arguments[j][i]); }
-      zipped.push(inner);
+        zipped.push(inner);
     }
 
     return zipped;
@@ -434,6 +434,31 @@ var _ = {};
   //
   // See the Underbar readme for details.
   _.throttle = function(func, wait) {
+    var result;
+    var timeout = null;
+    var lastCall = 0;
+
+    var forLater = function() {
+      lastCall = new Date().getTime();
+      timeout = null;
+      result = func.apply(null, arguments);
+    };
+
+    var throttledFunction = function() {
+      var now = new Date().getTime();
+      var remaining = wait - (now - lastCall);
+      if (remaining <= 0 || remaining > wait) {
+        clearTimeout(timeout);
+        timeout = null;
+        lastCall = now;
+        result = func.apply(null, arguments);
+      } else if (!timeout) {
+        timeout = setTimeout(forLater, remaining);
+      }
+      return result;
+    };
+
+    return throttledFunction;
   };
 
 }).call(this);
